@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JobModule } from './modules/job/job.module';
+import { UtilisateurModule } from './modules/utilisateur/utilisateur.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -13,7 +14,7 @@ import { JobModule } from './modules/job/job.module';
     database: 'FindAJobDB',
     entities: [],
     synchronize: true,
-  }), JobModule],
+  }), JobModule, UtilisateurModule],
   controllers: [],
   providers: [],
 })
