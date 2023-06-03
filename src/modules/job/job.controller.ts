@@ -1,5 +1,6 @@
-import { Controller, Get, HttpException, HttpStatus, Param } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { JobService } from './job.service';
+import { JobEntity } from 'src/database/Entities/Job/Job.Entity';
 
 @Controller('job')
 export class JobController {
@@ -46,7 +47,24 @@ export class JobController {
         throw new HttpException("Aucun jobs ouvert n'est disponible pour l'instant", HttpStatus.NOT_FOUND)
     }
 
+    /**
+     * 
+     * @param job 
+     * @returns The created Job
+     */
+    @Post()
+    createJob(@Body() job: JobEntity) {
+        return this.jobService.createJob(job);
+    }
 
-
+    /**
+     * 
+     * @param jobId 
+     * @returns The job with you value if updated or not_modified error else
+     */
+    @Put("/update/:job_id")
+    async updateJob(@Param("job_id") jobId: number, @Body() job: JobEntity) {
+        return await this.jobService.updateJob(jobId, job);
+    }
 
 }

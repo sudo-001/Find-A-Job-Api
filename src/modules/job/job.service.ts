@@ -46,13 +46,28 @@ export class JobService {
     /**
      * Fonction pour ajouter un job
      */
-    async createJOb(job: JobEntity) {
+    async createJob(job: JobEntity) {
         return await this.jobRepository.save(job);
     }
 
     /**
      * Fonction pour modifier le statut d'un job au lieu de le supprimer totalement
      */
-    
+
+
+    /**
+     * Fonction pour modifier un job
+     */
+    async updateJob(jobId: number, jobToUpdate: JobEntity) {
+        const job = await this.jobRepository.findOne({
+            where: { id: jobId }
+        });
+
+        if (!job)
+            return null;
+
+        return await this.jobRepository.update(jobId, jobToUpdate)
+    }
+
 
 }
