@@ -20,7 +20,7 @@ export class UtilisateurController {
     /**
      * 
      * @param userId 
-     * @returns An error or the fined user
+     * @returns An error or the finded user
      */
     @Get(":user_id")
     async getOneUser(@Param("user_id") userId: number) {

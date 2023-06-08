@@ -6,6 +6,7 @@ import { EntrepriseEntity } from './database/Entities/Entreprise/Entreprise.Enti
 import { ImageEntity } from './database/Entities/Image/Image.Entity';
 import { UtilisateurEntity } from './database/Entities/Utilisateur/Utilisateur.Entity';
 import { JobEntity } from './database/Entities/Job/Job.Entity';
+import { AdminModule } from './modules/admin/admin.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { JobEntity } from './database/Entities/Job/Job.Entity';
     database: 'FindAJobDB',
     entities: [EntrepriseEntity, ImageEntity, UtilisateurEntity, JobEntity],
     synchronize: false,
-  }), JobModule, UtilisateurModule],
+  }), JobModule, UtilisateurModule, AdminModule],
   controllers: [],
   providers: [],
 })

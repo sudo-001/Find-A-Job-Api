@@ -25,6 +25,14 @@ export class UtilisateurEntity {
     @Column({ nullable: true })
     created: Date;
 
+    @Column()
+    type: string;
+
+    @BeforeInsert()
+    setType() {
+        this.type = "user";
+    }
+    
     @BeforeInsert()
     setCreatedDate() {
         this.created = new Date();
