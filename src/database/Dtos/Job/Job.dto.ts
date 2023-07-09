@@ -8,10 +8,16 @@ export class JobDto {
     type_de_contrat: string;
 
     @ApiProperty()
+    remote: boolean;
+
+    @ApiProperty()
+    nombre_poste: number;
+
+    @ApiProperty()
     description: string;
 
     @ApiProperty()
-    competences: string[];
+    competences: string;
 
     @ApiProperty()
     niveau_expertise: string;

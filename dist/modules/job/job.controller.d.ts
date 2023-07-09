@@ -1,11 +1,12 @@
 import { JobService } from './job.service';
-import { JobEntity } from 'src/database/Entities/Job/Job.Entity';
+import { JobDto } from 'src/database/Dtos/Job/Job.dto';
 export declare class JobController {
     private readonly jobService;
     constructor(jobService: JobService);
-    getAll(): Promise<any>;
-    getOneJob(jobId: number): Promise<JobEntity>;
-    getAvaiblesJobs(): Promise<JobEntity[]>;
-    createJob(job: JobEntity): Promise<JobEntity>;
-    updateJob(jobId: number, job: JobEntity): Promise<import("typeorm").UpdateResult>;
+    getAll(): Promise<import("../../database/Entities/Job/Job.Entity").JobEntity[]>;
+    getRecent(): Promise<import("../../database/Entities/Job/Job.Entity").JobEntity[]>;
+    getOneJob(jobId: number): Promise<import("../../database/Entities/Job/Job.Entity").JobEntity>;
+    getAvaiblesJobs(): Promise<import("../../database/Entities/Job/Job.Entity").JobEntity[]>;
+    createJob(job: JobDto): Promise<JobDto & import("../../database/Entities/Job/Job.Entity").JobEntity>;
+    updateJob(jobId: number, job: JobDto): Promise<import("typeorm").UpdateResult>;
 }

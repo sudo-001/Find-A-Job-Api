@@ -14,9 +14,6 @@ const typeorm_1 = require("typeorm");
 const Entreprise_Entity_1 = require("../Entreprise/Entreprise.Entity");
 const Utilisateur_Entity_1 = require("../Utilisateur/Utilisateur.Entity");
 let JobEntity = class JobEntity {
-    setCreatedDate() {
-        this.created = new Date();
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -35,8 +32,8 @@ __decorate([
     __metadata("design:type", String)
 ], JobEntity.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'text', array: true, default: [] }),
-    __metadata("design:type", Array)
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
 ], JobEntity.prototype, "competences", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
@@ -55,26 +52,30 @@ __decorate([
     __metadata("design:type", Date)
 ], JobEntity.prototype, "deadline", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Boolean)
+], JobEntity.prototype, "remote", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 1 }),
+    __metadata("design:type", Number)
+], JobEntity.prototype, "nombre_poste", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], JobEntity.prototype, "created", void 0);
 __decorate([
-    (0, typeorm_1.BeforeInsert)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], JobEntity.prototype, "setCreatedDate", null);
-__decorate([
     (0, typeorm_1.ManyToOne)(type => Entreprise_Entity_1.EntrepriseEntity, entreprise => entreprise.jobs),
-    (0, typeorm_1.JoinColumn)(),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Entreprise_Entity_1.EntrepriseEntity)
 ], JobEntity.prototype, "entreprise", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(type => Utilisateur_Entity_1.UtilisateurEntity),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], JobEntity.prototype, "favoriseur", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(type => Utilisateur_Entity_1.UtilisateurEntity),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], JobEntity.prototype, "postulant", void 0);
 JobEntity = __decorate([

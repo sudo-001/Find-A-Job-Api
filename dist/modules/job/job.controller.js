@@ -15,13 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.JobController = void 0;
 const common_1 = require("@nestjs/common");
 const job_service_1 = require("./job.service");
-const Job_Entity_1 = require("../../database/Entities/Job/Job.Entity");
+const swagger_1 = require("@nestjs/swagger");
+const Job_dto_1 = require("../../database/Dtos/Job/Job.dto");
 let JobController = class JobController {
     constructor(jobService) {
         this.jobService = jobService;
     }
     getAll() {
         return this.jobService.getAll();
+    }
+    getRecent() {
+        return this.jobService.getRecent();
     }
     async getOneJob(jobId) {
         const job = await this.jobService.getOneJob(jobId);
@@ -43,12 +47,21 @@ let JobController = class JobController {
     }
 };
 __decorate([
+    (0, swagger_1.ApiTags)('Jobs'),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], JobController.prototype, "getAll", null);
 __decorate([
+    (0, swagger_1.ApiTags)('Jobs'),
+    (0, common_1.Get)('recents'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], JobController.prototype, "getRecent", null);
+__decorate([
+    (0, swagger_1.ApiTags)('Jobs'),
     (0, common_1.Get)(":job_id"),
     __param(0, (0, common_1.Param)("job_id")),
     __metadata("design:type", Function),
@@ -56,24 +69,27 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], JobController.prototype, "getOneJob", null);
 __decorate([
+    (0, swagger_1.ApiTags)('Jobs'),
     (0, common_1.Get)("/available"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], JobController.prototype, "getAvaiblesJobs", null);
 __decorate([
+    (0, swagger_1.ApiTags)('Jobs'),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Job_Entity_1.JobEntity]),
+    __metadata("design:paramtypes", [Job_dto_1.JobDto]),
     __metadata("design:returntype", void 0)
 ], JobController.prototype, "createJob", null);
 __decorate([
+    (0, swagger_1.ApiTags)('Jobs'),
     (0, common_1.Put)("/update/:job_id"),
     __param(0, (0, common_1.Param)("job_id")),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Job_Entity_1.JobEntity]),
+    __metadata("design:paramtypes", [Number, Job_dto_1.JobDto]),
     __metadata("design:returntype", Promise)
 ], JobController.prototype, "updateJob", null);
 JobController = __decorate([

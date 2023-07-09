@@ -14,9 +14,6 @@ const typeorm_1 = require("typeorm");
 const Job_Entity_1 = require("../Job/Job.Entity");
 const Image_Entity_1 = require("../Image/Image.Entity");
 let EntrepriseEntity = class EntrepriseEntity {
-    setCreatedDate() {
-        this.created = new Date();
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -47,23 +44,19 @@ __decorate([
     __metadata("design:type", String)
 ], EntrepriseEntity.prototype, "site_web", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(type => Image_Entity_1.ImageEntity, image => image.entrprise_profil, { nullable: true }),
-    __metadata("design:type", String)
-], EntrepriseEntity.prototype, "image_profil", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(type => Image_Entity_1.ImageEntity, image => image.entrprise_coverture, { nullable: true }),
-    __metadata("design:type", String)
-], EntrepriseEntity.prototype, "image_de_couverture", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], EntrepriseEntity.prototype, "created", void 0);
 __decorate([
-    (0, typeorm_1.BeforeInsert)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], EntrepriseEntity.prototype, "setCreatedDate", null);
+    (0, typeorm_1.OneToOne)(() => Image_Entity_1.ImageEntity),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", String)
+], EntrepriseEntity.prototype, "image_profil", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(type => Image_Entity_1.ImageEntity),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", String)
+], EntrepriseEntity.prototype, "image_de_couverture", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(type => Job_Entity_1.JobEntity, job => job.entreprise),
     __metadata("design:type", Array)

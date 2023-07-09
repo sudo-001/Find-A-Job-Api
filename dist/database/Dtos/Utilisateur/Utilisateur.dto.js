@@ -31,7 +31,7 @@ __decorate([
 ], UtilisateurDto.prototype, "mot_de_passe", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", Array)
+    __metadata("design:type", String)
 ], UtilisateurDto.prototype, "postes_preferes", void 0);
 exports.UtilisateurDto = UtilisateurDto;
 //# sourceMappingURL=Utilisateur.dto.js.map

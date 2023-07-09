@@ -7,9 +7,8 @@ export declare class EntrepriseEntity {
     email: string;
     numéro_de_telephone: string;
     site_web: string;
+    created: Date;
     image_profil: string;
     image_de_couverture: string;
-    created: Date;
-    setCreatedDate(): void;
     jobs: JobEntity[];
 }

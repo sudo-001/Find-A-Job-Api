@@ -10,11 +10,12 @@ async function bootstrap() {
         .setTitle('Find A Job')
         .setDescription('Find A Job Api is an API of creating, editing, deleting, getting, applications, and favorites Jobs')
         .setVersion('1.0')
-        .addTag('cats')
+        .addTag('Jobs')
+        .addTag('Users')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document);
-    await app.listen(3000);
+    await app.listen(3001);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

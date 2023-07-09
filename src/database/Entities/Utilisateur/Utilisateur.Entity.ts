@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { JobEntity } from "../Job/Job.Entity";
 import { ImageEntity } from "../Image/Image.Entity";
 
@@ -19,38 +19,36 @@ export class UtilisateurEntity {
     @Column()
     mot_de_passe: string;
 
-    @Column({ type: 'text', array: true, default: [] })
-    postes_preferes: string[];
+    // Stock un tableau de poste préférés
+    @Column()
+    postes_preferes: string;
 
-    @Column({ nullable: true })
+    @CreateDateColumn()
     created: Date;
 
-    @Column()
+    @Column({
+        default: 'user'
+    })
     type: string;
 
-    @BeforeInsert()
-    setType() {
-        this.type = "user";
-    }
+    // @BeforeInsert()
+    // setType() {
+    //     this.type = "user";
+    // }
     
-    @BeforeInsert()
-    setCreatedDate() {
-        this.created = new Date();
-    }
+    // @BeforeInsert()
+    // setCreatedDate() {
+    //     this.created = new Date();
+    // }
 
-    @OneToMany(type => ImageEntity, image => image.utilisateur)
-    photo_de_profil: string;
+    @OneToOne(type => ImageEntity)
+    @JoinTable()
+    photo_de_profil: ImageEntity;
 
     @ManyToMany(type => JobEntity)
-    @JoinTable({
-        name: "Job_favoris"
-    })
     job_favoris: JobEntity[];
 
     @ManyToMany(type => JobEntity)
-    @JoinTable({
-        name: "Job_applications",
-    })
     job_applications: JobEntity[];
     
 }

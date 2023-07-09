@@ -23,7 +23,15 @@ let JobService = class JobService {
     }
     getAll() {
         return this.jobRepository.find({
-            relations: ["entreprise", "favoriseur", "postulant"]
+            relations: ["entreprise", "favoriseur", "postulant"],
+            order: { created: 'DESC' },
+        });
+    }
+    getRecent() {
+        return this.jobRepository.find({
+            order: { created: 'DESC' },
+            relations: ["entreprise", "favoriseur", "postulant"],
+            take: 4,
         });
     }
     async getOneJob(jobId) {
@@ -40,6 +48,7 @@ let JobService = class JobService {
         });
     }
     async createJob(job) {
+        console.log(job);
         return await this.jobRepository.save(job);
     }
     async updateJob(jobId, jobToUpdate) {

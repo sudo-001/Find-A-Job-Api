@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { JobEntity } from "../Job/Job.Entity";
 import { ImageEntity } from "../Image/Image.Entity";
 
@@ -26,19 +26,22 @@ export class EntrepriseEntity {
     @Column({ nullable: true })
     site_web: string;
 
-    @OneToMany(type => ImageEntity, image => image.entrprise_profil, { nullable: true })
-    image_profil: string;
-
-    @OneToMany(type => ImageEntity, image => image.entrprise_coverture, { nullable: true })
-    image_de_couverture: string;
-
-    @Column({ nullable: true })
+    @CreateDateColumn()
     created: Date;
 
-    @BeforeInsert()
-    setCreatedDate() {
-        this.created = new Date();
-    }
+    @OneToOne(() => ImageEntity)
+    @JoinColumn()
+    image_profil: string;
+
+    @OneToOne(type => ImageEntity)
+    @JoinColumn()
+    image_de_couverture: string;
+    
+
+    // @BeforeInsert()
+    // setCreatedDate() {
+    //     this.created = new Date();
+    // }
 
     @OneToMany(type => JobEntity, job => job.entreprise)
     jobs: JobEntity[];

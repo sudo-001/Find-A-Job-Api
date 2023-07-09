@@ -15,16 +15,18 @@ const Entreprise_Entity_1 = require("./database/Entities/Entreprise/Entreprise.E
 const Image_Entity_1 = require("./database/Entities/Image/Image.Entity");
 const Utilisateur_Entity_1 = require("./database/Entities/Utilisateur/Utilisateur.Entity");
 const Job_Entity_1 = require("./database/Entities/Job/Job.Entity");
+const admin_module_1 = require("./modules/admin/admin.module");
+const Admin_Entity_1 = require("./database/Entities/Admin/Admin.Entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forRoot({
                 type: 'sqlite',
-                database: 'FindAJobDB',
-                entities: [Entreprise_Entity_1.EntrepriseEntity, Image_Entity_1.ImageEntity, Utilisateur_Entity_1.UtilisateurEntity, Job_Entity_1.JobEntity],
-                synchronize: false,
-            }), job_module_1.JobModule, utilisateur_module_1.UtilisateurModule],
+                database: 'FindAJobDB.sqlite',
+                entities: [Job_Entity_1.JobEntity, Entreprise_Entity_1.EntrepriseEntity, Image_Entity_1.ImageEntity, Utilisateur_Entity_1.UtilisateurEntity, Admin_Entity_1.AdminEntity],
+                synchronize: true,
+            }), job_module_1.JobModule, utilisateur_module_1.UtilisateurModule, admin_module_1.AdminModule],
         controllers: [],
         providers: [],
     })

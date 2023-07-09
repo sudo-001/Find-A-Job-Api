@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JobDto } from 'src/database/Dtos/Job/Job.dto';
 import { JobEntity } from 'src/database/Entities/Job/Job.Entity';
 import { MoreThan, Repository } from 'typeorm';
 
@@ -9,14 +10,26 @@ export class JobService {
     constructor(
         @InjectRepository(JobEntity)
         private readonly jobRepository: Repository<JobEntity>
-    ) {}
+    ) { }
 
     /**
      * Fonction pour avoir la liste de tout les jobs confondus dans la base de donnée
      */
-    getAll(): Promise<any> {
+    getAll() {
         return this.jobRepository.find({
-            relations: ["entreprise","favoriseur","postulant"]
+            relations: ["entreprise", "favoriseur", "postulant"],
+            order: { created: 'DESC' },
+        });
+    }
+
+    /**
+     * Fonction pour avoir la liste de tout les jobs les plus récent dans la base de données
+     */
+    getRecent() {
+        return this.jobRepository.find({
+            order: { created: 'DESC' },
+            relations: ["entreprise", "favoriseur", "postulant"],
+            take: 4,
         });
     }
 
@@ -25,8 +38,8 @@ export class JobService {
      */
     async getOneJob(jobId: number): Promise<JobEntity> {
         const job = await this.jobRepository.findOne({
-            where: { id: jobId},
-            relations: ["entreprise","favoriseur","postulant"]
+            where: { id: jobId },
+            relations: ["entreprise", "favoriseur", "postulant"]
         });
 
         return job;
@@ -39,14 +52,15 @@ export class JobService {
     async getAvailablesJobs() {
         const currentDate = new Date()
         return await this.jobRepository.find({
-            where: { deadline: MoreThan(currentDate)},
+            where: { deadline: MoreThan(currentDate) },
         });
     }
 
     /**
      * Fonction pour ajouter un job
      */
-    async createJob(job: JobEntity) {
+    async createJob(job: JobDto) {
+        console.log(job)
         return await this.jobRepository.save(job);
     }
 
@@ -58,7 +72,7 @@ export class JobService {
     /**
      * Fonction pour modifier un job
      */
-    async updateJob(jobId: number, jobToUpdate: JobEntity) {
+    async updateJob(jobId: number, jobToUpdate: JobDto) {
         const job = await this.jobRepository.findOne({
             where: { id: jobId }
         });

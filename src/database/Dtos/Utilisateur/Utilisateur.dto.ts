@@ -14,5 +14,5 @@ export class UtilisateurDto {
     mot_de_passe: string;
 
     @ApiProperty()
-    postes_preferes: string[];
+    postes_preferes: string;
 }

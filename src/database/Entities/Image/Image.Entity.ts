@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { EntrepriseEntity } from "../Entreprise/Entreprise.Entity";
 import { UtilisateurEntity } from "../Utilisateur/Utilisateur.Entity";
 
@@ -31,12 +31,12 @@ export class ImageEntity {
     @Column()
     size: number;
 
-    @ManyToOne(type => EntrepriseEntity, entreprise => entreprise.image_profil, { nullable: true })
-    entrprise_profil: EntrepriseEntity;
+    // @OneToOne(type => EntrepriseEntity, entreprise => entreprise.image_profil)
+    // entreprise_profil: EntrepriseEntity;
 
-    @ManyToOne(type => EntrepriseEntity, entreprise => entreprise.image_de_couverture, { nullable: true })
-    entrprise_coverture: EntrepriseEntity;
+    // @ManyToOne(type => EntrepriseEntity, entreprise => entreprise.image_de_couverture)
+    // entrprise_coverture: EntrepriseEntity;
 
-    @ManyToOne(type => UtilisateurEntity, utilisateur => utilisateur.photo_de_profil, { nullable: true })
-    utilisateur: UtilisateurEntity;
+    // @ManyToOne(type => UtilisateurEntity, utilisateur => utilisateur.photo_de_profil)
+    // utilisateur: UtilisateurEntity;
 }

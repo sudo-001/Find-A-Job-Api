@@ -3,5 +3,5 @@ export declare class UtilisateurDto {
     prenom: string;
     email: string;
     mot_de_passe: string;
-    postes_preferes: string[];
+    postes_preferes: string;
 }

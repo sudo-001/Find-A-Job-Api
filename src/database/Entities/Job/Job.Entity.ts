@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { EntrepriseEntity } from "../Entreprise/Entreprise.Entity";
 import { UtilisateurEntity } from "../Utilisateur/Utilisateur.Entity";
 
@@ -17,8 +17,9 @@ export class JobEntity {
     @Column()
     description: string;
 
-    @Column({ type: 'text', array: true, default: []})
-    competences: string[];
+    // Stock un tableau de compétences
+    @Column()
+    competences: string;
 
     @Column()
     niveau_expertise: string;
@@ -32,22 +33,30 @@ export class JobEntity {
     @Column()
     deadline: Date;
 
-    @Column({ nullable: true })
+    @Column()
+    remote: boolean;
+    
+    @Column({ default: 1 })
+    nombre_poste: number;
+    
+    @CreateDateColumn()
     created: Date;
-
-    @BeforeInsert()
-    setCreatedDate() {
-        this.created = new Date();
-    }
+    
+    // @BeforeInsert()
+    // setCreatedDate() {
+    //     this.created = new Date();
+    // }
 
     @ManyToOne(type => EntrepriseEntity, entreprise => entreprise.jobs)
-    @JoinColumn()
+    @JoinTable()
     entreprise: EntrepriseEntity;
 
     @ManyToMany(type => UtilisateurEntity)
+    @JoinTable()
     favoriseur: UtilisateurEntity[];
 
     @ManyToMany(type => UtilisateurEntity)
+    @JoinTable()
     postulant: UtilisateurEntity[];
 
 }

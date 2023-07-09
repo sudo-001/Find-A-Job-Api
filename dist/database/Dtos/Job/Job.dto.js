@@ -23,11 +23,19 @@ __decorate([
 ], JobDto.prototype, "type_de_contrat", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], JobDto.prototype, "remote", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], JobDto.prototype, "nombre_poste", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], JobDto.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", Array)
+    __metadata("design:type", String)
 ], JobDto.prototype, "competences", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),

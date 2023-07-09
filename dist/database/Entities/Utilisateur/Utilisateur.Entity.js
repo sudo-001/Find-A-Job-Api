@@ -14,9 +14,6 @@ const typeorm_1 = require("typeorm");
 const Job_Entity_1 = require("../Job/Job.Entity");
 const Image_Entity_1 = require("../Image/Image.Entity");
 let UtilisateurEntity = class UtilisateurEntity {
-    setCreatedDate() {
-        this.created = new Date();
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -39,35 +36,30 @@ __decorate([
     __metadata("design:type", String)
 ], UtilisateurEntity.prototype, "mot_de_passe", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'text', array: true, default: [] }),
-    __metadata("design:type", Array)
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
 ], UtilisateurEntity.prototype, "postes_preferes", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], UtilisateurEntity.prototype, "created", void 0);
 __decorate([
-    (0, typeorm_1.BeforeInsert)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], UtilisateurEntity.prototype, "setCreatedDate", null);
-__decorate([
-    (0, typeorm_1.OneToMany)(type => Image_Entity_1.ImageEntity, image => image.utilisateur),
+    (0, typeorm_1.Column)({
+        default: 'user'
+    }),
     __metadata("design:type", String)
+], UtilisateurEntity.prototype, "type", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(type => Image_Entity_1.ImageEntity),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Image_Entity_1.ImageEntity)
 ], UtilisateurEntity.prototype, "photo_de_profil", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(type => Job_Entity_1.JobEntity),
-    (0, typeorm_1.JoinTable)({
-        name: "Job_favoris"
-    }),
     __metadata("design:type", Array)
 ], UtilisateurEntity.prototype, "job_favoris", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(type => Job_Entity_1.JobEntity),
-    (0, typeorm_1.JoinTable)({
-        name: "Job_applications",
-    }),
     __metadata("design:type", Array)
 ], UtilisateurEntity.prototype, "job_applications", void 0);
 UtilisateurEntity = __decorate([

@@ -7,19 +7,15 @@ import { ImageEntity } from './database/Entities/Image/Image.Entity';
 import { UtilisateurEntity } from './database/Entities/Utilisateur/Utilisateur.Entity';
 import { JobEntity } from './database/Entities/Job/Job.Entity';
 import { AdminModule } from './modules/admin/admin.module';
+import { AdminEntity } from './database/Entities/Admin/Admin.Entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
-    // type: 'mysql',
     type: 'sqlite',
-    // host: 'localhost',
-    // port: 3306,
-    // username: 'root',
-    // password: '',
-    database: 'FindAJobDB',
-    entities: [EntrepriseEntity, ImageEntity, UtilisateurEntity, JobEntity],
-    synchronize: false,
-  }), JobModule, UtilisateurModule, AdminModule],
+    database: 'FindAJobDB.sqlite',
+    entities: [JobEntity,EntrepriseEntity, ImageEntity, UtilisateurEntity, AdminEntity ],
+    synchronize: true,
+  }),JobModule, UtilisateurModule, AdminModule],
   controllers: [],
   providers: [],
 })

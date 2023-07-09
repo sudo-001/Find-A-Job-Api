@@ -1,5 +1,3 @@
-import { EntrepriseEntity } from "../Entreprise/Entreprise.Entity";
-import { UtilisateurEntity } from "../Utilisateur/Utilisateur.Entity";
 export declare class ImageEntity {
     id: number;
     fieldname: string;
@@ -10,7 +8,4 @@ export declare class ImageEntity {
     filename: string;
     path: string;
     size: number;
-    entrprise_profil: EntrepriseEntity;
-    entrprise_coverture: EntrepriseEntity;
-    utilisateur: UtilisateurEntity;
 }

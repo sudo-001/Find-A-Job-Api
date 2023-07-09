@@ -1,6 +1,7 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { UtilisateurService } from './utilisateur.service';
 import { UtilisateurEntity } from 'src/database/Entities/Utilisateur/Utilisateur.Entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('utilisateur')
 export class UtilisateurController {
@@ -12,6 +13,7 @@ export class UtilisateurController {
      * 
      * @returns All signed up users on the website
      */
+    
     @Get()
     getAll() {
         return this.utilisateurService.getAll();
@@ -22,6 +24,7 @@ export class UtilisateurController {
      * @param userId 
      * @returns An error or the finded user
      */
+    
     @Get(":user_id")
     async getOneUser(@Param("user_id") userId: number) {
         const user = await this.utilisateurService.getOneUser(userId);
@@ -37,6 +40,7 @@ export class UtilisateurController {
      * @param user 
      * @returns The user created
      */
+    
     @Post()
     createUser(@Body() user: UtilisateurEntity) {
         return this.utilisateurService.createUser(user);
@@ -48,6 +52,7 @@ export class UtilisateurController {
      * @param user 
      * @returns An error or the updated user
      */
+    
     @Put("/update/:user_id")
     async updateUser(@Param("user_id") userId: number, @Body() user: UtilisateurEntity) {
         const res = await this.utilisateurService.updateUser(userId, user);
