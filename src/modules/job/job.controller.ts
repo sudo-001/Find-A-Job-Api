@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { JobService } from './job.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JobDto } from 'src/database/Dtos/Job/Job.dto';
 
 @Controller('job')
@@ -12,12 +12,14 @@ export class JobController {
 
     
     @ApiTags('Jobs')
+    @ApiOperation({ summary: 'Get all the jobs',description: "A route to get informations of all the job on the website"})
     @Get()
     getAll() {
         return this.jobService.getAll();
     }
 
     @ApiTags('Jobs')
+    @ApiOperation({ summary: 'Get all the recents jobs',description: "A route to get informations of a all the 4 most recents job on the website"})
     @Get('recents')
     getRecent() {
         return this.jobService.getRecent();
@@ -29,6 +31,7 @@ export class JobController {
      * @returns A specific job
      */
     @ApiTags('Jobs')
+    @ApiOperation({ summary: 'Get a specific job',description: "A route to get informations of a specific job on the website"})
     @Get(":job_id")
     async getOneJob(@Param("job_id") jobId: number) {
         const job = await this.jobService.getOneJob(jobId);

@@ -48,6 +48,7 @@ let JobController = class JobController {
 };
 __decorate([
     (0, swagger_1.ApiTags)('Jobs'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all the jobs', description: "A route to get informations of all the job on the website" }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -55,6 +56,7 @@ __decorate([
 ], JobController.prototype, "getAll", null);
 __decorate([
     (0, swagger_1.ApiTags)('Jobs'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all the recents jobs', description: "A route to get informations of a all the 4 most recents job on the website" }),
     (0, common_1.Get)('recents'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -62,6 +64,7 @@ __decorate([
 ], JobController.prototype, "getRecent", null);
 __decorate([
     (0, swagger_1.ApiTags)('Jobs'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get a specific job', description: "A route to get informations of a specific job on the website" }),
     (0, common_1.Get)(":job_id"),
     __param(0, (0, common_1.Param)("job_id")),
     __metadata("design:type", Function),

@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UtilisateurController = void 0;
 const common_1 = require("@nestjs/common");
 const utilisateur_service_1 = require("./utilisateur.service");
-const Utilisateur_Entity_1 = require("../../database/Entities/Utilisateur/Utilisateur.Entity");
+const swagger_1 = require("@nestjs/swagger");
+const Utilisateur_dto_1 = require("../../database/Dtos/Utilisateur/Utilisateur.dto");
 let UtilisateurController = class UtilisateurController {
     constructor(utilisateurService) {
         this.utilisateurService = utilisateurService;
@@ -40,12 +41,16 @@ let UtilisateurController = class UtilisateurController {
     }
 };
 __decorate([
+    (0, swagger_1.ApiTags)('Users'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all the user', description: "A route to get informations of a all the users registered on the website" }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UtilisateurController.prototype, "getAll", null);
 __decorate([
+    (0, swagger_1.ApiTags)('Users'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get a specify user', description: "A route to get informations of a specific user by entering their 'id' " }),
     (0, common_1.Get)(":user_id"),
     __param(0, (0, common_1.Param)("user_id")),
     __metadata("design:type", Function),
@@ -53,18 +58,22 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UtilisateurController.prototype, "getOneUser", null);
 __decorate([
+    (0, swagger_1.ApiTags)('Users'),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new user', description: "A route to create a new user by entering their informations" }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Utilisateur_Entity_1.UtilisateurEntity]),
+    __metadata("design:paramtypes", [Utilisateur_dto_1.UtilisateurDto]),
     __metadata("design:returntype", void 0)
 ], UtilisateurController.prototype, "createUser", null);
 __decorate([
+    (0, swagger_1.ApiTags)('Users'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update a specify user', description: "A route to update informations of a specify user by entering their 'id' and the new informations" }),
     (0, common_1.Put)("/update/:user_id"),
     __param(0, (0, common_1.Param)("user_id")),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Utilisateur_Entity_1.UtilisateurEntity]),
+    __metadata("design:paramtypes", [Number, Utilisateur_dto_1.UtilisateurDto]),
     __metadata("design:returntype", Promise)
 ], UtilisateurController.prototype, "updateUser", null);
 UtilisateurController = __decorate([
