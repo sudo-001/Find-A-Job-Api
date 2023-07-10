@@ -6,7 +6,7 @@ FROM node:18-alpine AS development
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json tsconfig*.json OpiolDatabase* ./
+COPY --chown=node:node package*.json tsconfig*.json FindAJobDB* ./
 
 RUN npm ci
 
@@ -23,7 +23,7 @@ FROM node:18-alpine AS build
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json tsconfig*.json OpiolDatabase* ./
+COPY --chown=node:node package*.json tsconfig*.json FindAJobDB* ./
 
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
@@ -46,7 +46,7 @@ FROM node:18-alpine AS production
 
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
-COPY OpiolDatabase* ./
+COPY FindAJobDB* ./
 
 CMD ["node", "dist/main.js"]
 
